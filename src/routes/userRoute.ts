@@ -1,11 +1,15 @@
 import { Router } from "express";
-import userController from "../controllers/userController.js";
+import userControllerOrm from "../controllers/userControllerOrm.js";
 
 const router = Router();
 
-router.post('/user', userController.createUser);
-router.get('/user/:email', userController.getUser);
-router.put('/user', userController.updateUser);
-router.delete('/user/:email', userController.deleteUser);
+
+
+router.post("/user", userControllerOrm.createUser);
+router.get("/user", userControllerOrm.findAllUsers);
+router.get('/user/:email', userControllerOrm.findOneUser);
+router.put('/user', userControllerOrm.updateUser);
+router.delete('/user/:email', userControllerOrm.deleteUser);
+router.delete('/user/', userControllerOrm.deleteAllUsers);
 
 export { router as userRouter };
