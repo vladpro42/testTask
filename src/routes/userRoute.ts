@@ -4,8 +4,8 @@ import userController from "../controllers/userController.js";
 const router = Router();
 
 router.post('/user', userController.createUser);
-router.get('/user/:id', userController.getUser);
+router.get('/user/:email', userController.getUser);
 router.put('/user', userController.updateUser);
-router.delete('/user/:id', userController.deleteUser);
+router.delete('/user/:email', userController.deleteUser);
 
 export { router as userRouter };
