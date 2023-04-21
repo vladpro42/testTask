@@ -1,14 +1,13 @@
 import { Request, Response } from "express";
 import User from "../models/User.js";
-import { where } from "sequelize";
-import { UserInfo } from "os";
-import Model from "sequelize";
+import { File } from "buffer";
+import fileService from "../service/fileService.js"
 
 interface IBody {
     email: string;
     firstName: string;
     lastName: string;
-    image?: string;
+    image?: File;
     pdf?: string;
 }
 
@@ -16,20 +15,23 @@ class userControllerOrm {
 
     async createUser(req: Request, res: Response) {
         try {
-            const { email, firstName, lastName, image, pdf }: IBody = req.body;
+            const { email, firstName, lastName, pdf }: IBody = req.body;
+
+            const picture = req.files;
+            const fileName = fileService.saveFile(picture)
 
             if (!email && firstName && lastName) {
                 res.status(400).send({
                     message: "Content can not be empty"
                 });
-                return;
+                return; ``
             }
 
             const person = await User.create({
                 email,
                 firstName,
                 lastName,
-                image,
+                image: fileName,
                 pdf,
             })
 

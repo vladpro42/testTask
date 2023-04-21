@@ -3,8 +3,6 @@ import userControllerOrm from "../controllers/userControllerOrm.js";
 
 const router = Router();
 
-
-
 router.post("/user", userControllerOrm.createUser);
 router.get("/user", userControllerOrm.findAllUsers);
 router.get('/user/:email', userControllerOrm.findOneUser);

@@ -16,7 +16,7 @@ const User = sequelize.define("user_table", {
         allowNull: false,
     },
     image: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING, 
     },
     pdf: {
         type: Sequelize.STRING,
