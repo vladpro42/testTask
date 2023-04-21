@@ -7,7 +7,7 @@ interface IBody {
     email: string;
     firstName: string;
     lastName: string;
-    image?: File;
+    image?: string;
     pdf?: string;
 }
 
@@ -24,7 +24,7 @@ class userControllerOrm {
                 res.status(400).send({
                     message: "Content can not be empty"
                 });
-                return; ``
+                return; 
             }
 
             const person = await User.create({

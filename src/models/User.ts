@@ -1,7 +1,22 @@
-import Sequelize from "sequelize";
+import Sequelize, { DataTypes, Model, Optional } from "sequelize";
 import sequelize from "./db.config.js";
+import { File } from "buffer";
 
-const User = sequelize.define("user_table", {
+interface IUser {
+    email: string,
+    firstName: string,
+    lastName: string,
+    image?: string,
+    pdf?: File | null | string,
+}
+
+interface UserCreationAttributes extends Optional<IUser, "pdf"> { }
+
+interface UserInstance
+    extends Model<IUser, UserCreationAttributes>,
+    IUser { }
+
+const User = sequelize.define<UserInstance>("user_table", {
     email: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -16,11 +31,11 @@ const User = sequelize.define("user_table", {
         allowNull: false,
     },
     image: {
-        type: Sequelize.STRING, 
+        type: Sequelize.STRING,
     },
     pdf: {
         type: Sequelize.STRING,
     },
 })
 
-export default User;
+export default User
